@@ -9,7 +9,7 @@
  * Version:           1.0.0
  */
 function pg_load_ga(){
-	$ga_code = apply_filters( 'pg_google_analytics_id', 'UA-72640311-1' );
+	$ga_code = get_option( 'pg_google_analytics_id' );
 	?>
 	<script>
 		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -26,3 +26,24 @@ function pg_load_ga(){
 }
 
 add_action( 'wp_head', 'pg_load_ga' );
+
+$new_general_setting = new pg_ga_setting();
+
+class pg_ga_setting {
+    function pg_ga_setting( ) {
+        add_filter( 'admin_init' , array( &$this , 'register_fields' ) );
+    }
+    function register_fields() {
+        register_setting( 'general', 'pg_google_analytics_id' );
+        add_settings_field(
+			'pg_google_analytics_id',
+			'<label for="pg_google_analytics_id">'.__('Google Analytics ID' , 'pg_google_analytics_id' ).'</label>' ,
+			array(&$this, 'fields_html'),
+			'general'
+		);
+    }
+    function fields_html() {
+        $value = get_option( 'pg_google_analytics_id' );
+        echo '<input type="text" id="pg_google_analytics_id" name="pg_google_analytics_id" value="' . $value . '" />';
+    }
+}
