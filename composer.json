@@ -1,0 +1,11 @@
+{
+  "name": "poundandgrain/pg-google-analytics",
+  "type": "wordpress-plugin",
+  "homepage": "https://github.com/poundandgrain/pg-google-analytics",
+  "license": "private",
+  "description": "WP plugin for custom Google Analytics embed code.",
+  "keywords": ["plugin","wordpress","analytics"],
+  "require": {
+    "composer/installers": "~1.0.6"
+  }
+}
