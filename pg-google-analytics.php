@@ -30,7 +30,7 @@ add_action( 'wp_head', 'pg_load_ga' );
 $new_general_setting = new pg_ga_setting();
 
 class pg_ga_setting {
-    function pg_ga_setting( ) {
+    function __construct( ) {
         add_filter( 'admin_init' , array( &$this , 'register_fields' ) );
     }
     function register_fields() {
